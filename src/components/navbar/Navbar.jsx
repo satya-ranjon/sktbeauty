@@ -15,8 +15,9 @@ const menu = [
 
 const Navbar = () => {
   const [isOpen, setOpen] = useState(true);
+  const [styled, setStyled] = useState(null);
 
-  const [windowWidth] = useDisplay();
+  const [windowWidth, scrollY] = useDisplay();
 
   useLayoutEffect(() => {
     if (windowWidth >= 768) {
@@ -27,9 +28,18 @@ const Navbar = () => {
     }
   }, [windowWidth]);
 
+  useLayoutEffect(() => {
+    if (scrollY > 100 && windowWidth >= 768) {
+      setStyled("fixed top-0 left-0 right-0 z-10 ");
+      return;
+    }
+    setStyled(null);
+  }, [scrollY]);
+
   return (
     <>
-      <div className="bg-[#471d6b]  text-white border-b-[1px] border-b-violet-800">
+      <div
+        className={`bg-[#471d6b]  text-white border-b-[1px] border-b-violet-800  ${styled}`}>
         <div className=" container mx-auto flex justify-between items-center py-5 font-normal text-md px-4 ">
           <Logo />
           <FaBarsStaggered
@@ -40,7 +50,7 @@ const Navbar = () => {
             <div
               className={`${
                 windowWidth <= 425 && "absolute"
-              } top-0 bottom-0  w-64 md:w-fit right-0  bg-[#471d6b]`}>
+              } top-0 bottom-0  w-64 md:w-fit right-0  bg-[#471d6b] z-10`}>
               <button
                 onClick={() => setOpen(!isOpen)}
                 className=" md:hidden p-3 bg-[#b995d960] m-3 rounded-sm">
