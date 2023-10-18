@@ -1,10 +1,10 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import slider from "../../data/slider.json";
 import { AiOutlineArrowLeft, AiOutlineArrowRight } from "react-icons/ai";
 
 const HeroSection = () => {
   const [activeSlide, setActiveSlide] = useState({ start: 0, end: 1 });
-  console.log(activeSlide);
+
   const handleSliderNext = () => {
     if (slider.length > activeSlide.end) {
       setActiveSlide((prev) => ({
@@ -12,6 +12,7 @@ const HeroSection = () => {
         start: prev.start + 1,
         end: prev.end + 1,
       }));
+      return;
     }
     if (slider.length === activeSlide.end) {
       setActiveSlide((prev) => ({
@@ -36,6 +37,16 @@ const HeroSection = () => {
       end: prev.end - 1,
     }));
   };
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      handleSliderNext();
+    }, 3000);
+
+    return () => {
+      clearInterval(interval);
+    };
+  }, [activeSlide]);
 
   return (
     <div className=" flex justify-center items-center">
