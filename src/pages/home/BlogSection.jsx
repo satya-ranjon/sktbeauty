@@ -48,8 +48,8 @@ const BlogSection = () => {
                 <BiSolidRightArrow /> <span>Read More</span>
               </button>
             </div>
-            <div className=" w-full flex flex-col gap-2 justify-start items-start ">
-              <div className="w-full flex justify-start items-start gap-3">
+            <div className=" w-full flex flex-col gap-4 md:gap-2 justify-start items-start ">
+              <div className="w-full flex flex-col md:flex-row justify-start items-start gap-3">
                 <div className="w-full">
                   <img
                     src="https://i.ibb.co/7pqwdp7/1-FILEminimizer-1.jpg"
@@ -80,7 +80,7 @@ const BlogSection = () => {
                   </div>
                 </div>
               </div>
-              <div className="w-full flex justify-start items-start gap-3">
+              <div className="w-full flex flex-col md:flex-row justify-start items-start gap-3">
                 <div className="w-full">
                   <img
                     src="https://i.ibb.co/7pqwdp7/1-FILEminimizer-1.jpg"
@@ -111,7 +111,7 @@ const BlogSection = () => {
                   </div>
                 </div>
               </div>
-              <div className="w-full flex justify-start items-start gap-3">
+              <div className="w-full flex flex-col md:flex-row justify-start items-start gap-3">
                 <div className="w-full">
                   <img
                     src="https://i.ibb.co/7pqwdp7/1-FILEminimizer-1.jpg"
