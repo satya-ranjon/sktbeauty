@@ -6,10 +6,13 @@ import { AiOutlineMinus, AiOutlinePlus } from "react-icons/ai";
 import { useState } from "react";
 import SectionTitle from "../../components/SectionTitle";
 import RelatedProduct from "../../components/RelatedProduct";
+import toast from "react-hot-toast";
+import useAuthentication from "../../hooks/useAuthentication";
 
 const ProductDetails = () => {
   const [quantity, setQuantity] = useState(1);
 
+  const product = useLoaderData();
   const {
     name,
     imageUrl,
@@ -20,7 +23,9 @@ const ProductDetails = () => {
     rating,
     new: ProductNew,
     sale,
-  } = useLoaderData();
+  } = product || {};
+
+  const { userId } = useAuthentication();
 
   const incrementQuantity = () => {
     setQuantity((prev) => prev + 1);
@@ -30,6 +35,33 @@ const ProductDetails = () => {
       return;
     }
     setQuantity((prev) => prev - 1);
+  };
+
+  const handleAddCard = async () => {
+    try {
+      const response = await fetch(`${import.meta.env.VITE_SERVER_URL}/card`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          userId: userId,
+          quantity: quantity,
+          product: product,
+        }),
+      });
+
+      if (!response.ok) {
+        toast.error("Network response was not ok");
+      }
+
+      const data = await response.json();
+      console.log(data);
+      toast.success("Product Add Card Successfully");
+      setQuantity(1);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -76,7 +108,7 @@ const ProductDetails = () => {
                   />
                 </button>
               </div>
-              <Button> ADD TO CARD</Button>
+              <Button onClick={handleAddCard}> ADD TO CARD</Button>
             </div>
           </div>
         </div>
