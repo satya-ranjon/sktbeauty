@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import useOutsideClick from "../hooks/useOutsideClick";
 import PropTypes from "prop-types";
 
-const SelectProductType = ({ types, getValue }) => {
+const SelectProductType = ({ types, getValue, label, reset }) => {
   const [dropdownIsOpen, setDropdownIsOpen] = useState(false);
   const [selected, setSelected] = useState([]);
 
@@ -13,6 +13,10 @@ const SelectProductType = ({ types, getValue }) => {
   useEffect(() => {
     getValue(selected);
   }, [selected]);
+
+  useEffect(() => {
+    setSelected([]);
+  }, [reset]);
 
   const handelSelected = (value) => {
     const findSelectedType = selected?.find((i) => i.id === value.id);
@@ -33,12 +37,18 @@ const SelectProductType = ({ types, getValue }) => {
   return (
     <div ref={dropdownRef} className=" relative">
       <div className="text-sm font-medium leading-6 text-violet-950 uppercase">
-        Product Types
+        {label}
       </div>
       <div
         onClick={() => setDropdownIsOpen(true)}
         className="flex justify-center items-center  cursor-pointer bg-white rounded-md border-0  text-violet-950 shadow-sm ring-1 ring-inset ring-gray-300  sm:text-sm sm:leading-6">
-        <div className="w-full  px-2 h-10 flex justify-start gap-3 items-center">
+        <div
+          className={`w-full  p-2 flex flex-wrap justify-start gap-3 items-center ${
+            dropdownIsOpen && selected?.length <= 0 && "p-5"
+          }`}>
+          {!dropdownIsOpen && selected?.length === 0 && (
+            <span className=" text-zinc-400">Select Product Types</span>
+          )}
           {selected?.map((item) => (
             <div
               key={item.id}
@@ -56,7 +66,7 @@ const SelectProductType = ({ types, getValue }) => {
         </div>
       </div>
       {dropdownIsOpen && (
-        <div className=" absolute py-2  left-0 right-0 max-h-60 bg-white overflow-y-scroll">
+        <div className="shadow-xl absolute py-2  left-0 right-0 max-h-60 bg-white overflow-y-scroll">
           <div className="flex justify-start items-start flex-col">
             {types?.map((item) => {
               const findSelectedType = selected?.find((i) => i.id === item.id);
@@ -83,6 +93,8 @@ const SelectProductType = ({ types, getValue }) => {
 SelectProductType.propTypes = {
   types: PropTypes.array.isRequired,
   getValue: PropTypes.func,
+  label: PropTypes.string,
+  reset: PropTypes.bool,
 };
 
 export default SelectProductType;
