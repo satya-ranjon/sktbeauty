@@ -1,6 +1,11 @@
 import PropTypes from "prop-types";
 
-const InputField = ({ label, textarea = false, ...argument }) => {
+const InputField = ({
+  label,
+  type = "text",
+  textarea = false,
+  ...argument
+}) => {
   return (
     <div>
       <label
@@ -14,7 +19,7 @@ const InputField = ({ label, textarea = false, ...argument }) => {
             {...argument}
             placeholder={label}
             id={label}
-            type="text"
+            type={type}
             className=" px-2 block w-full rounded-md border-0 py-1.5 text-violet-950 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-100 sm:text-sm sm:leading-6"
           />
         )}
@@ -23,7 +28,7 @@ const InputField = ({ label, textarea = false, ...argument }) => {
             {...argument}
             placeholder={label}
             id={label}
-            type="text"
+            type={type}
             className=" h-28 px-2 block w-full rounded-md border-0 py-1.5 text-violet-950 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-100 sm:text-sm sm:leading-6"
           />
         )}
@@ -35,6 +40,7 @@ const InputField = ({ label, textarea = false, ...argument }) => {
 InputField.propTypes = {
   label: PropTypes.string,
   textarea: PropTypes.bool,
+  type: PropTypes.string,
 };
 
 export default InputField;
