@@ -43,12 +43,10 @@ const SelectProductType = ({ types, getValue, label, reset }) => {
         onClick={() => setDropdownIsOpen(true)}
         className="flex justify-center items-center  cursor-pointer bg-white rounded-md border-0  text-violet-950 shadow-sm ring-1 ring-inset ring-gray-300  sm:text-sm sm:leading-6">
         <div
-          className={`w-full  p-2 flex flex-wrap justify-start gap-3 items-center ${
+          className={`w-full  p-2 flex flex-wrap text-zinc-400 justify-start gap-3 items-center ${
             dropdownIsOpen && selected?.length <= 0 && "p-5"
           }`}>
-          {!dropdownIsOpen && selected?.length === 0 && (
-            <span className=" text-zinc-400">Select Product Types</span>
-          )}
+          {!dropdownIsOpen && selected?.length === 0 && label}
           {selected?.map((item) => (
             <div
               key={item.id}
@@ -61,12 +59,12 @@ const SelectProductType = ({ types, getValue, label, reset }) => {
             </div>
           ))}
         </div>
-        <div className=" px-3">
+        <div className={`px-3 ${dropdownIsOpen && " rotate-180"}`}>
           <BsChevronDown />
         </div>
       </div>
       {dropdownIsOpen && (
-        <div className="shadow-xl absolute py-2  left-0 right-0 max-h-60 bg-white overflow-y-scroll">
+        <div className="shadow-xl absolute py-2  left-0 right-0 max-h-60 bg-white overflow-y-scroll z-50">
           <div className="flex justify-start items-start flex-col">
             {types?.map((item) => {
               const findSelectedType = selected?.find((i) => i.id === item.id);
