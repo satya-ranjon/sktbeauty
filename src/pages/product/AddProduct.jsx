@@ -5,6 +5,8 @@ import PageHeader from "../../components/PageHeader";
 import RatingInput from "../../components/RatingInput";
 
 import SelectProductType from "../../components/SelectProductType";
+import SelectProductBrand from "../../components/SelectProductBrand";
+import CheckBoxInput from "../../components/CheckBoxInput";
 
 const types = [
   { id: "1", name: "Skincare" },
@@ -21,22 +23,26 @@ const initialState = {
   name: "",
   imageUrl: "",
   types: [],
-  brandName: "",
+  brandName: {},
   price: "",
   description: "",
   rating: "",
+  new: false,
+  sale: false,
 };
 
 const AddProduct = () => {
   const [state, setState] = useState(initialState);
   const [resetForm, setResetForm] = useState(false);
-  // console.log(state);
 
   const getSelectedTypesValue = (value) => {
     setState((prev) => ({ ...prev, types: value }));
   };
   const getRatingValue = (value) => {
     setState((prev) => ({ ...prev, rating: value }));
+  };
+  const getBrand = (value) => {
+    setState((prev) => ({ ...prev, brandName: value }));
   };
 
   const handleSubmit = (e) => {
@@ -72,14 +78,12 @@ const AddProduct = () => {
             reset={resetForm}
             label="Select Product Types"
           />
-
-          <InputField
-            label="Product Brand Name"
-            value={state.brandName}
-            onChange={(e) =>
-              setState((prev) => ({ ...prev, brandName: e.target.value }))
-            }
+          <SelectProductBrand
+            label="Select Product Brand"
+            getValue={getBrand}
+            reset={resetForm}
           />
+
           <InputField
             type="number"
             label="Product Price"
@@ -102,6 +106,21 @@ const AddProduct = () => {
             reset={resetForm}
             label="Product Rating"
           />
+
+          <div className=" flex justify-start gap-3">
+            <CheckBoxInput
+              label="New Product (Optional)"
+              checked={state.new}
+              onChange={() => setState((prev) => ({ ...prev, new: !prev.new }))}
+            />
+            <CheckBoxInput
+              label="Sale Product (Optional)"
+              checked={state.sale}
+              onChange={() =>
+                setState((prev) => ({ ...prev, sale: !prev.sale }))
+              }
+            />
+          </div>
 
           <Button>Create Product</Button>
         </form>
