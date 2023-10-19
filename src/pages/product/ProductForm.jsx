@@ -31,8 +31,18 @@ const initialState = {
   sale: false,
 };
 
-const ProductForm = ({ getValue = () => {}, resetForm }) => {
+const ProductForm = ({
+  getValue = () => {},
+  resetForm = false,
+  initialData,
+}) => {
   const [state, setState] = useState(initialState);
+
+  useEffect(() => {
+    if (initialData) {
+      setState(initialData);
+    }
+  }, [initialData]);
 
   const getSelectedTypesValue = (value) => {
     setState((prev) => ({ ...prev, types: value }));
@@ -74,31 +84,6 @@ const ProductForm = ({ getValue = () => {}, resetForm }) => {
       return;
     }
     getValue(state);
-
-    // try {
-    //   const response = await fetch(
-    //     `${import.meta.env.VITE_SERVER_URL}/product`,
-    //     {
-    //       method: "POST",
-    //       headers: {
-    //         "Content-Type": "application/json",
-    //       },
-    //       body: JSON.stringify(state),
-    //     }
-    //   );
-
-    //   if (!response.ok) {
-    //     toast.error("Network response was not ok");
-    //   }
-
-    //   const data = await response.json();
-    //   console.log(data);
-    //   setResetForm(!resetForm);
-    //   setState(initialState);
-    //   toast.success("Product Create Successfully");
-    // } catch (error) {
-    //   console.log(error);
-    // }
   };
 
   return (
@@ -123,11 +108,13 @@ const ProductForm = ({ getValue = () => {}, resetForm }) => {
         getValue={getSelectedTypesValue}
         reset={resetForm}
         label="Select Product Types"
+        initialData={state.types}
       />
       <SelectProductBrand
         label="Select Product Brand"
         getValue={getBrand}
         reset={resetForm}
+        initialData={state.brandName}
       />
 
       <InputField
@@ -151,6 +138,7 @@ const ProductForm = ({ getValue = () => {}, resetForm }) => {
         getValue={getRatingValue}
         reset={resetForm}
         label="Product Rating"
+        initialData={state.rating}
       />
 
       <div className=" flex justify-start gap-3">
