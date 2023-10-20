@@ -2,9 +2,11 @@ import { useState } from "react";
 import PageHeader from "../../components/PageHeader";
 import toast from "react-hot-toast";
 import ProductForm from "./ProductForm";
+import useTheme from "../../hooks/useTheme";
 
 const AddProduct = () => {
   const [resetForm, setResetForm] = useState(false);
+  const { dark } = useTheme();
 
   const handleCreate = async (value) => {
     setResetForm(!resetForm);
@@ -34,7 +36,7 @@ const AddProduct = () => {
   };
 
   return (
-    <div className="bg-[#f6eeff]">
+    <div className={` ${dark ? "bg-zinc-800" : "bg-[#f6eeff]"}`}>
       <PageHeader title="Create Product" currentPage="Product add" />
       <div className=" container mx-auto px-5">
         <ProductForm getValue={handleCreate} resetForm={resetForm} />

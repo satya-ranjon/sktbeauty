@@ -6,10 +6,12 @@ import Loader from "../../components/Loader";
 import { Link } from "react-router-dom";
 import toast from "react-hot-toast";
 import { useEffect, useState } from "react";
+import useTheme from "../../hooks/useTheme";
 
 const MyCart = () => {
   const [cards, setCards] = useState([]);
   const [data, loading] = useMyCard();
+  const { dark } = useTheme();
 
   useEffect(() => {
     setCards(data);
@@ -54,8 +56,11 @@ const MyCart = () => {
   }
   if (cards?.length === 0) {
     return (
-      <div className="py-32">
-        <h1 className=" text-5xl font-semibold  text-center mt-3 text-[#471d6b] uppercase">
+      <div
+        className={`py-32 ${
+          dark ? " bg-zinc-800 text-zinc-200" : " bg-[#f6eeff] text-violet-950"
+        }`}>
+        <h1 className=" text-5xl font-semibold  text-center mt-3 uppercase">
           You have not card
         </h1>
         <div className=" flex justify-center items-center pt-5">
@@ -68,7 +73,10 @@ const MyCart = () => {
   }
 
   return (
-    <div className="bg-[#f6eeff] text-violet-950">
+    <div
+      className={`${
+        dark ? " bg-zinc-800 text-zinc-200" : " bg-[#f6eeff] text-violet-950"
+      }`}>
       <PageHeader title="CARD" currentPage="Card" />
       <div className=" container mx-auto px-5 py-20">
         <div className=" grid grid-cols-1 lg:grid-cols-3  lg:gap-5 xl:gap-10 ">
@@ -77,7 +85,9 @@ const MyCart = () => {
             {cards?.map((item) => (
               <div
                 key={item._id}
-                className="grid grid-cols-2 md:grid-cols-3 gap-1 bg-white pr-5 border-b-2 py-2">
+                className={`grid grid-cols-2 md:grid-cols-3 gap-1  pr-5 border-b-2 py-2 ${
+                  dark ? "bg-zinc-700" : "bg-white"
+                }`}>
                 <div className="col-span-2  ">
                   {/* Product info */}
                   <div className=" flex gap-4 justify-start items-center">
@@ -126,7 +136,7 @@ const MyCart = () => {
             ))}
           </div>
           <div className=" lg:col-span-1 mt-4 lg:mt-0 ">
-            <div className=" bg-white">
+            <div className={`${dark ? "bg-zinc-700" : "bg-white"}`}>
               <div className=" flex justify-between uppercase items-center  p-5  border-b-2">
                 <h1>SUBTOTAL</h1>
                 <h1>${subTotal}</h1>

@@ -38,6 +38,7 @@ const SingleSlider = ({ start = 0, end = 1 }) => {
         <div key={item._id} className=" w-full h-full relative">
           <img src={item.img} className=" w-full h-96" />
           <div
+            style={{ color: item.color }}
             className={` absolute top-0 left-0 right-0 bottom-0 flex flex-col gap-5 justify-center items-start pl-28 text-[${item.color}]`}>
             <h1 className="  uppercase tracking-[.45em] font-semibold">
               {item.title}
@@ -46,6 +47,7 @@ const SingleSlider = ({ start = 0, end = 1 }) => {
               {item.offer}
             </h1>
             <button
+              style={{ borderBlockColor: item.color, color: item.color }}
               className={` px-4 py-2 font-semibold text-md border-2 border-[${item.color}]`}>
               Explore
             </button>

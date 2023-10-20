@@ -8,9 +8,11 @@ import SectionTitle from "../../components/SectionTitle";
 import RelatedProduct from "../../components/RelatedProduct";
 import toast from "react-hot-toast";
 import useAuthentication from "../../hooks/useAuthentication";
+import useTheme from "../../hooks/useTheme";
 
 const ProductDetails = () => {
   const [quantity, setQuantity] = useState(1);
+  const { dark } = useTheme();
 
   const product = useLoaderData();
   const {
@@ -65,7 +67,10 @@ const ProductDetails = () => {
   };
 
   return (
-    <div className="bg-[#f6eeff] text-violet-950">
+    <div
+      className={`${
+        dark ? " bg-zinc-800 text-zinc-200" : "bg-[#f6eeff] text-violet-950"
+      }`}>
       <PageHeader title="SHOP" currentPage="Product Details" />
       <div className=" container mx-auto px-5 py-20">
         <div className=" xl:mx-[200px]">
@@ -113,7 +118,7 @@ const ProductDetails = () => {
           </div>
         </div>
         <div className=" flex justify-center items-center mt-8 gap-10">
-          <div className=" p-5 mb-0 border-2 my-4">
+          <div className={`p-5 mb-0 border-2 my-4 ${dark && "bg-zinc-600"}`}>
             <img src={brandName?.img} alt="img" />
             <h1 className=" text-4xl font-semibold text-center">
               {brandName.name}
@@ -125,7 +130,11 @@ const ProductDetails = () => {
             </h1>
             <div className=" flex justify-start gap-5 items-center">
               {types?.map((i) => (
-                <div key={i.id} className=" px-3 py-2 text-md bg-zinc-200">
+                <div
+                  key={i.id}
+                  className={`px-3 py-2 text-md ${
+                    dark ? " bg-violet-900" : " bg-zinc-200"
+                  }`}>
                   {i.name}
                 </div>
               ))}

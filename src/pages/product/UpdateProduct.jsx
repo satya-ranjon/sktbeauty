@@ -4,22 +4,12 @@ import ProductForm from "./ProductForm";
 import { useEffect, useState } from "react";
 import Loader from "../../components/Loader";
 import toast from "react-hot-toast";
+import useTheme from "../../hooks/useTheme";
 
-// const {
-//   name,
-//   imageUrl,
-//   types,
-//   brandName,
-//   price,
-//   description,
-//   rating,
-//   new: ProductNew,
-//   sale,
-// } = useLoaderData();
 const UpdateProduct = () => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
-  console.log(data);
+  const { dark } = useTheme();
 
   const { id } = useParams();
 
@@ -65,7 +55,7 @@ const UpdateProduct = () => {
     return <Loader />;
   }
   return (
-    <div className="bg-[#f6eeff]">
+    <div className={`${dark ? "bg-zinc-800" : "bg-[#f6eeff]"}`}>
       <PageHeader title="Create Product" currentPage="Product add" />
       <div className=" container mx-auto px-5">
         <ProductForm getValue={handleUpdate} initialData={data} />

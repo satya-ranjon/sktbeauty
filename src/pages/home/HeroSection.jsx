@@ -41,7 +41,7 @@ const HeroSection = () => {
   useEffect(() => {
     const interval = setInterval(() => {
       handleSliderNext();
-    }, 3000);
+    }, 2500);
 
     return () => {
       clearInterval(interval);
