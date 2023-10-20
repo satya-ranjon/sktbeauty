@@ -32,7 +32,9 @@ const SelectProductBrand = ({
   };
 
   useEffect(() => {
-    setSelected(null);
+    if (reset) {
+      setSelected(null);
+    }
   }, [reset]);
 
   const handelSelected = (value) => {
@@ -59,10 +61,9 @@ const SelectProductBrand = ({
           className={`w-full  p-2 flex flex-wrap justify-start gap-3 items-center ${
             dark ? "text-zinc-200" : " text-zinc-400 "
           } ${dropdownIsOpen && !selected && "p-5"}`}>
-          {!dropdownIsOpen && !selected && label}
+          {!dropdownIsOpen && !selected?._id && label}
 
           <span className={`${dark ? "" : "text-violet-950 "}`}>
-            {" "}
             {selected?.name}
           </span>
         </div>

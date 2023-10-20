@@ -6,7 +6,6 @@ import OurProducts from "./OurProducts";
 
 const Home = () => {
   const { dark } = useTheme();
-  console.log(dark);
   return (
     <>
       <HeroSection />

@@ -11,7 +11,7 @@ const SelectProductType = ({ types, getValue, label, reset, initialData }) => {
   const { dark } = useTheme();
 
   useEffect(() => {
-    if (initialData) {
+    if (initialData?.length > 0) {
       setSelected(initialData);
     }
   }, [initialData]);
@@ -23,7 +23,9 @@ const SelectProductType = ({ types, getValue, label, reset, initialData }) => {
   }, [selected]);
 
   useEffect(() => {
-    setSelected([]);
+    if (reset) {
+      setSelected([]);
+    }
   }, [reset]);
 
   const handelSelected = (value) => {

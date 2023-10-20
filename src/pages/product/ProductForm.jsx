@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import Button from "../../components/Button";
 import InputField from "../../components/InputField";
 import RatingInput from "../../components/RatingInput";
@@ -31,18 +31,8 @@ const initialState = {
   sale: false,
 };
 
-const ProductForm = ({
-  getValue = () => {},
-  resetForm = false,
-  initialData,
-}) => {
+const ProductForm = ({ getValue, resetForm = false }) => {
   const [state, setState] = useState(initialState);
-
-  useEffect(() => {
-    if (initialData) {
-      setState(initialData);
-    }
-  }, [initialData]);
 
   const getSelectedTypesValue = (value) => {
     setState((prev) => ({ ...prev, types: value }));
@@ -159,4 +149,4 @@ const ProductForm = ({
   );
 };
 
-export default ProductForm;
+export default React.memo(ProductForm);

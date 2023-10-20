@@ -16,7 +16,9 @@ const RatingInput = ({ getValue = () => {}, label, reset, initialData }) => {
   const { dark } = useTheme();
 
   useEffect(() => {
-    setStats(initialStar);
+    if (reset) {
+      setStats(initialStar);
+    }
   }, [reset]);
 
   const handleSelect = (index) => {

@@ -57,8 +57,7 @@ const ProductDetails = () => {
         toast.error("Network response was not ok");
       }
 
-      const data = await response.json();
-      console.log(data);
+      await response.json();
       toast.success("Product Add Card Successfully");
       setQuantity(1);
     } catch (error) {

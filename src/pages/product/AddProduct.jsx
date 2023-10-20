@@ -10,6 +10,7 @@ const AddProduct = () => {
 
   const handleCreate = async (value) => {
     setResetForm(!resetForm);
+
     try {
       const response = await fetch(
         `${import.meta.env.VITE_SERVER_URL}/product`,
@@ -27,7 +28,6 @@ const AddProduct = () => {
       }
 
       const data = await response.json();
-      console.log(data);
       if (data?.acknowledged) setResetForm(!resetForm);
       toast.success("Product Create Successfully");
     } catch (error) {
