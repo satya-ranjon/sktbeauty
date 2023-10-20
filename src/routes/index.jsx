@@ -11,6 +11,7 @@ import PrivateRoutes from "./PrivateRoutes";
 import PublicRoutes from "./PublicRoutes";
 import BrandProduct from "../pages/brand/BrandProduct";
 import UpdateProduct from "../pages/product/UpdateProduct";
+import Shop from "../pages/shop/Shop";
 
 const router = createBrowserRouter([
   {
@@ -80,6 +81,14 @@ const router = createBrowserRouter([
         element: (
           <PrivateRoutes>
             <UpdateProduct />
+          </PrivateRoutes>
+        ),
+      },
+      {
+        path: "/shop",
+        element: (
+          <PrivateRoutes>
+            <Shop />
           </PrivateRoutes>
         ),
       },

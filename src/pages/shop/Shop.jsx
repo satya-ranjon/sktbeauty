@@ -1,41 +1,34 @@
 import { Link } from "react-router-dom";
-import SectionTitle from "../../components/SectionTitle";
-import useProducts from "../../hooks/useProducts";
 import Loader from "../../components/Loader";
+import PageHeader from "../../components/PageHeader";
 import SingleProductCard from "../../components/SingleProductCard";
+import useProducts from "../../hooks/useProducts";
 import useTheme from "../../hooks/useTheme";
-import Button from "../../components/Button";
 
-const OurProducts = () => {
+const Shop = () => {
   const [data, loading] = useProducts();
   const { dark } = useTheme();
 
   if (loading) {
     return <Loader />;
   }
-
   return (
     <div
       className={`${
         dark ? "bg-zinc-800 text-zinc-200" : "bg-[#f6eeff] text-[#471d6b]"
       } `}>
-      <div className=" container mx-auto px-5 ">
-        <SectionTitle> Beauty Products</SectionTitle>
+      <PageHeader title="Shop" currentPage="Shop" />
+      <div className=" container mx-auto px-5 py-20">
         <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-5 gap-y-10 mt-20">
-          {data?.slice(0, 9).map((item) => (
+          {data?.map((item) => (
             <Link key={item._id} to={`/product/${item._id}`}>
               <SingleProductCard product={item} />
             </Link>
           ))}
         </div>
-        <Link
-          to="/shop"
-          className=" flex justify-center items-center w-full py-7">
-          <Button>Continue Shop</Button>
-        </Link>
       </div>
     </div>
   );
 };
 
-export default OurProducts;
+export default Shop;
