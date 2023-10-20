@@ -51,16 +51,20 @@ const UpdateProduct = () => {
     }
   };
 
+  console.log(data);
+
   if (loading) {
     return <Loader />;
   }
   return (
-    <div className={`${dark ? "bg-zinc-800" : "bg-[#f6eeff]"}`}>
-      <PageHeader title="Create Product" currentPage="Product add" />
-      <div className=" container mx-auto px-5">
-        <ProductForm getValue={handleUpdate} initialData={data} />
+    data?._id && (
+      <div className={`${dark ? "bg-zinc-800" : "bg-[#f6eeff]"}`}>
+        <PageHeader title="Update Product" currentPage="Product Update" />
+        <div className=" container mx-auto px-5">
+          <ProductForm getValue={handleUpdate} initialData={data} />
+        </div>
       </div>
-    </div>
+    )
   );
 };
 

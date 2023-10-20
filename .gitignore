@@ -20,9 +20,13 @@ dist-ssr
 .firebaserc
 .firebase
 firebase.json
+netlify.toml
 .env
 *.suo
 *.ntvs*
 *.njsproj
 *.sln
 *.sw?
+
+# Local Netlify folder
+.netlify
