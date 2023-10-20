@@ -1,0 +1,45 @@
+[
+  {
+    "_id": "1",
+    "title": "Best for body",
+    "offer": "60% OFF",
+    "color": "#f6eeff",
+    "img": "https://i.ibb.co/n7QWrJ5/luchiana-0325904117-760x407-1.jpg"
+  },
+
+  {
+    "_id": "2",
+    "title": "neutral items",
+    "offer": "20% OFF",
+    "color": "#471d6b",
+    "img": "https://i.ibb.co/0G748w4/luchiana-0325206996-760x407.jpg"
+  },
+  {
+    "_id": "3",
+    "title": "Pro Tools",
+    "offer": "25% OFF",
+    "color": "#f6eeff",
+    "img": "https://i.ibb.co/vZpM51q/luchiana-0325882093-760x407.jpg"
+  },
+  {
+    "_id": "4",
+    "title": "Hair Health",
+    "offer": "50% OFF",
+    "color": "#f6eeff",
+    "img": "https://i.ibb.co/Tr1VwQ6/luchiana-0325664736-760x407-1.jpg"
+  },
+  {
+    "_id": "5",
+    "title": "Christmas Days",
+    "offer": "40% OFF",
+    "color": "#471d6b",
+    "img": "https://i.ibb.co/2Nc1dw3/luchiana-0325335719-760x407.jpg"
+  },
+  {
+    "_id": "6",
+    "title": "Bodyshowers",
+    "offer": "10% OFF",
+    "color": "#f6eeff",
+    "img": "https://i.ibb.co/grgCzT1/luchiana-0325416161-760x407-1.jpg"
+  }
+]
