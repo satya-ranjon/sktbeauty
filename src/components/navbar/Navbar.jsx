@@ -7,6 +7,7 @@ import { useLayoutEffect, useState } from "react";
 import useDisplay from "../../hooks/useDisplay";
 import NavRightMenu from "./NavRightMenu";
 import ToggleButton from "../ToggleButton";
+import useTheme from "../../hooks/useTheme";
 
 const menu = [
   { link: "/", label: "HOME" },
@@ -17,6 +18,12 @@ const menu = [
 const Navbar = () => {
   const [isOpen, setOpen] = useState(true);
   const [styled, setStyled] = useState(null);
+
+  const { dark, toggleTheme } = useTheme();
+
+  const handleTheme = () => {
+    toggleTheme();
+  };
 
   const [windowWidth, scrollY] = useDisplay();
 
@@ -43,6 +50,10 @@ const Navbar = () => {
         className={`bg-[#471d6b]  text-white border-b-[1px] border-b-violet-800  ${styled}`}>
         <div className=" container mx-auto flex justify-between items-center py-5 font-normal text-md px-4 ">
           <Logo />
+
+          <div className=" md:hidden">
+            <ToggleButton onClick={handleTheme} toggle={dark} />
+          </div>
           <FaBarsStaggered
             className=" text-xl cursor-pointer md:hidden"
             onClick={() => setOpen(!isOpen)}
@@ -77,7 +88,7 @@ const Navbar = () => {
 
           <div className=" hidden md:flex items-center justify-start gap-4">
             <NavRightMenu />
-            <ToggleButton />
+            <ToggleButton onClick={handleTheme} toggle={dark} />
           </div>
         </div>
       </div>

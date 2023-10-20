@@ -1,4 +1,7 @@
+import useTheme from "../hooks/useTheme";
+
 const CheckBoxInput = ({ label, ...argument }) => {
+  const { dark } = useTheme();
   return (
     <div className="flex items-center mb-4">
       <input
@@ -10,7 +13,9 @@ const CheckBoxInput = ({ label, ...argument }) => {
       />
       <label
         htmlFor={label}
-        className="ml-2 text-md font-medium text-gray-900 ">
+        className={`ml-2 text-md font-medium ${
+          dark ? "text-zinc-200" : " text-violet-950"
+        }`}>
         {label}
       </label>
     </div>

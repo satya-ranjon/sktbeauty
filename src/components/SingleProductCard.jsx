@@ -1,8 +1,14 @@
 import { GrFormView } from "react-icons/gr";
+import useTheme from "../hooks/useTheme";
 
 const SingleProductCard = ({ product }) => {
+  const { dark } = useTheme();
+
   return (
-    <div className=" flex justify-start gap-2 items-start bg-white p-5 group cursor-pointer relative">
+    <div
+      className={`${
+        dark ? "bg-zinc-700" : "bg-white"
+      } flex justify-start gap-2 items-start  p-5 group cursor-pointer relative`}>
       <div className="w-36 h-full relative">
         <div className="w-full block">
           <img src={product?.imageUrl} alt="img" className=" w-full h-36" />

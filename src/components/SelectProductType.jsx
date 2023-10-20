@@ -3,10 +3,12 @@ import { AiOutlineClose, AiOutlineCheck } from "react-icons/ai";
 import { useEffect, useRef, useState } from "react";
 import useOutsideClick from "../hooks/useOutsideClick";
 import PropTypes from "prop-types";
+import useTheme from "../hooks/useTheme";
 
 const SelectProductType = ({ types, getValue, label, reset, initialData }) => {
   const [dropdownIsOpen, setDropdownIsOpen] = useState(false);
   const [selected, setSelected] = useState([]);
+  const { dark } = useTheme();
 
   useEffect(() => {
     if (initialData) {
@@ -42,12 +44,17 @@ const SelectProductType = ({ types, getValue, label, reset, initialData }) => {
 
   return (
     <div ref={dropdownRef} className=" relative">
-      <div className="text-sm font-medium leading-6 text-violet-950 uppercase">
+      <div
+        className={`text-sm font-medium leading-6  uppercase ${
+          dark ? "text-zinc-200" : " text-violet-950"
+        }`}>
         {label}
       </div>
       <div
         onClick={() => setDropdownIsOpen(true)}
-        className="flex justify-center items-center  cursor-pointer bg-white rounded-md border-0  text-violet-950 shadow-sm ring-1 ring-inset ring-gray-300  sm:text-sm sm:leading-6">
+        className={`${
+          dark ? "text-zinc-200 bg-zinc-700" : " text-violet-950 bg-white"
+        } flex justify-center items-center  cursor-pointer  rounded-md border-0   shadow-sm ring-1 ring-inset ring-gray-300  sm:text-sm sm:leading-6`}>
         <div
           className={`w-full  p-2 flex flex-wrap text-zinc-400 justify-start gap-3 items-center ${
             dropdownIsOpen && selected?.length <= 0 && "p-5"
@@ -70,7 +77,12 @@ const SelectProductType = ({ types, getValue, label, reset, initialData }) => {
         </div>
       </div>
       {dropdownIsOpen && (
-        <div className="shadow-xl absolute py-2  left-0 right-0 max-h-60 bg-white overflow-y-scroll z-50">
+        <div
+          className={`${
+            dark
+              ? "bg-zinc-800 z-50 text-zinc-200 border-[1px] border-b-zinc-200"
+              : "bg-white z-50"
+          }shadow-xl absolute py-2  left-0 right-0 max-h-60  overflow-y-scroll z-50`}>
           <div className="flex justify-start items-start flex-col">
             {types?.map((item) => {
               const findSelectedType = selected?.find((i) => i.id === item.id);
@@ -79,10 +91,18 @@ const SelectProductType = ({ types, getValue, label, reset, initialData }) => {
                 <div
                   onClick={() => handelSelected(item)}
                   key={item.id}
-                  className={`w-full py-2 px-4 flex justify-between items-center cursor-pointer hover:bg-violet-200 duration-300 transition-colors ${
-                    findSelectedType && "bg-violet-200"
+                  className={`w-full py-2 px-4 flex justify-between items-center cursor-pointer ${
+                    dark ? "hover:bg-zinc-700 " : "hover:bg-violet-200"
+                  } duration-300 transition-colors ${
+                    findSelectedType &&
+                    (dark ? " bg-zinc-700" : "bg-violet-200")
                   }`}>
-                  <span>{item.name}</span>
+                  <span
+                    className={`${
+                      dark ? "text-zinc-200" : " text-violet-950"
+                    }`}>
+                    {item.name}
+                  </span>
                   {findSelectedType && <AiOutlineCheck />}
                 </div>
               );

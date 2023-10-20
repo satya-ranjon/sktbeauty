@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { AiOutlineStar, AiFillStar } from "react-icons/ai";
 import PropTypes from "prop-types";
+import useTheme from "../hooks/useTheme";
 
 const initialStar = [
   { id: "1", select: false },
@@ -12,6 +13,7 @@ const initialStar = [
 
 const RatingInput = ({ getValue = () => {}, label, reset, initialData }) => {
   const [stars, setStats] = useState(initialStar);
+  const { dark } = useTheme();
 
   useEffect(() => {
     setStats(initialStar);
@@ -42,16 +44,27 @@ const RatingInput = ({ getValue = () => {}, label, reset, initialData }) => {
 
   return (
     <div>
-      <div className="text-sm font-medium leading-6 text-violet-950 uppercase">
+      <div
+        className={`text-sm font-medium leading-6 uppercase ${
+          dark ? "text-zinc-200" : " text-violet-950"
+        }`}>
         {label}
       </div>
       <div className=" flex justify-start items-center gap-3 ">
         {stars?.map((item, index) => (
           <div onClick={() => handleSelect(index)} className="" key={item.id}>
             {item.select ? (
-              <AiFillStar className=" text-5xl cursor-pointer text-violet-950 " />
+              <AiFillStar
+                className={` text-5xl cursor-pointer ${
+                  dark ? "text-zinc-200 " : "text-violet-950"
+                }`}
+              />
             ) : (
-              <AiOutlineStar className=" text-5xl cursor-pointer text-violet-950" />
+              <AiOutlineStar
+                className={` text-5xl cursor-pointer ${
+                  dark ? "text-zinc-200 " : "text-violet-950"
+                }`}
+              />
             )}
           </div>
         ))}

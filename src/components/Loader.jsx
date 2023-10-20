@@ -1,6 +1,12 @@
+import useTheme from "../hooks/useTheme";
+
 const Loader = () => {
+  const { dark } = useTheme();
   return (
-    <h1 className="bg-[#f6eeff] h-screen w-full flex justify-center items-center bg-[]">
+    <h1
+      className={`${
+        dark ? "bg-zinc-800" : " bg-[#f6eeff]"
+      } h-screen w-full flex justify-center items-center `}>
       <div role="status">
         <svg
           aria-hidden="true"
