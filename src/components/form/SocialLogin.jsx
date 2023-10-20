@@ -1,17 +1,17 @@
 import toast from "react-hot-toast";
-// import useAuthentication from "../../hooks/useAuthentication";
+import useAuthentication from "../../hooks/useAuthentication";
 
 const SocialLogin = () => {
-  //   const { loginGoogle } = useAuthentication();
+  const { loginGoogle } = useAuthentication();
 
   const handleSocialLogin = () => {
-    // loginGoogle()
-    //   .then((res) => {
-    //     toast.success("User logged in successfully");
-    //   })
-    //   .catch((error) => {
-    //     toast.error(error.message);
-    //   });
+    loginGoogle()
+      .then((res) => {
+        toast.success("User logged in successfully");
+      })
+      .catch((error) => {
+        toast.error(error.message);
+      });
   };
   return (
     <>

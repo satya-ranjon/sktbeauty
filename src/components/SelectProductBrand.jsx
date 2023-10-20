@@ -5,9 +5,20 @@ import useOutsideClick from "../hooks/useOutsideClick";
 import PropTypes from "prop-types";
 import useProductBrand from "../hooks/useProductBrand";
 
-const SelectProductBrand = ({ getValue = () => {}, label, reset }) => {
+const SelectProductBrand = ({
+  getValue = () => {},
+  label,
+  reset,
+  initialData,
+}) => {
   const [dropdownIsOpen, setDropdownIsOpen] = useState(false);
   const [selected, setSelected] = useState(null);
+
+  useEffect(() => {
+    if (initialData) {
+      setSelected(initialData);
+    }
+  }, [initialData]);
 
   const [data] = useProductBrand();
 
@@ -84,6 +95,7 @@ SelectProductBrand.propTypes = {
   getValue: PropTypes.func,
   label: PropTypes.string,
   reset: PropTypes.bool,
+  initialData: PropTypes.object,
 };
 
 export default SelectProductBrand;

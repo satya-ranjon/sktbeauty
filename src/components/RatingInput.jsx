@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { AiOutlineStar, AiFillStar } from "react-icons/ai";
 import PropTypes from "prop-types";
 
@@ -10,14 +10,14 @@ const initialStar = [
   { id: "5", select: false },
 ];
 
-const RatingInput = ({ getValue = () => {}, label, reset }) => {
+const RatingInput = ({ getValue = () => {}, label, reset, initialData }) => {
   const [stars, setStats] = useState(initialStar);
 
   useEffect(() => {
     setStats(initialStar);
   }, [reset]);
 
-  const handleSelect = (id, index) => {
+  const handleSelect = (index) => {
     let temp = [];
     for (let i = 0; i <= index; i++) {
       temp.push({ id: initialStar[i].id, select: true });
@@ -27,6 +27,13 @@ const RatingInput = ({ getValue = () => {}, label, reset }) => {
     }
     setStats(temp);
   };
+
+  useEffect(() => {
+    if (initialData) {
+      const index = parseFloat(initialData) - 1;
+      handleSelect(index);
+    }
+  }, [initialData]);
 
   useEffect(() => {
     const filterSelect = stars?.filter((item) => item.select === true);
@@ -40,10 +47,7 @@ const RatingInput = ({ getValue = () => {}, label, reset }) => {
       </div>
       <div className=" flex justify-start items-center gap-3 ">
         {stars?.map((item, index) => (
-          <div
-            onClick={() => handleSelect(item.id, index)}
-            className=""
-            key={item.id}>
+          <div onClick={() => handleSelect(index)} className="" key={item.id}>
             {item.select ? (
               <AiFillStar className=" text-5xl cursor-pointer text-violet-950 " />
             ) : (
@@ -61,4 +65,4 @@ RatingInput.propTypes = {
   label: PropTypes.string,
   reset: PropTypes.bool,
 };
-export default RatingInput;
+export default React.memo(RatingInput);

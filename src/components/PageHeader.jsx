@@ -7,7 +7,7 @@ const PageHeader = ({ title, currentPage }) => {
   return (
     <div style={{ backgroundImage: `url(${images.bgimg})` }} className=" py-10">
       <div className=" flex flex-col  justify-center items-center  text-white">
-        <h1 className=" font-semibold text-3xl">{title}</h1>
+        <h1 className=" font-semibold text-3xl uppercase">{title}</h1>
         <div className=" flex justify-center items-center gap-4 mt-8 uppercase text-sm">
           <Link
             to="/"

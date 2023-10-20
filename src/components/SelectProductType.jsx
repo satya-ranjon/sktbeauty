@@ -4,9 +4,15 @@ import { useEffect, useRef, useState } from "react";
 import useOutsideClick from "../hooks/useOutsideClick";
 import PropTypes from "prop-types";
 
-const SelectProductType = ({ types, getValue, label, reset }) => {
+const SelectProductType = ({ types, getValue, label, reset, initialData }) => {
   const [dropdownIsOpen, setDropdownIsOpen] = useState(false);
   const [selected, setSelected] = useState([]);
+
+  useEffect(() => {
+    if (initialData) {
+      setSelected(initialData);
+    }
+  }, [initialData]);
 
   const dropdownRef = useRef(null);
 
@@ -93,6 +99,7 @@ SelectProductType.propTypes = {
   getValue: PropTypes.func,
   label: PropTypes.string,
   reset: PropTypes.bool,
+  initialData: PropTypes.array,
 };
 
 export default SelectProductType;

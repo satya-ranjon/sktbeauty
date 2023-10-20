@@ -1,16 +1,17 @@
 import { NavLink } from "react-router-dom";
 import Logo from "../Logo";
-import { LiaUser } from "react-icons/lia";
 import { AiOutlineClose } from "react-icons/ai";
 import { FaBarsStaggered } from "react-icons/fa6";
 import SubNav from "./SubNav";
 import { useLayoutEffect, useState } from "react";
 import useDisplay from "../../hooks/useDisplay";
+import NavRightMenu from "./NavRightMenu";
+import ToggleButton from "../ToggleButton";
 
 const menu = [
   { link: "/", label: "HOME" },
   { link: "/add-product", label: "ADD PRODUCT" },
-  { link: "/my-cart", label: "MY CART" },
+  { link: "/cart", label: "MY CART" },
 ];
 
 const Navbar = () => {
@@ -67,30 +68,17 @@ const Navbar = () => {
                     {item.label}
                   </NavLink>
                 ))}
-                <NavLink
-                  to="/login"
-                  className={({ isActive }) =>
-                    `${
-                      isActive && "text-[#B995D9]"
-                    }   flex justify-center items-center gap-2 md:hidden `
-                  }>
-                  <span>LOGIN</span>
-                  <LiaUser />
-                </NavLink>
+                <div className="  md:hidden">
+                  <NavRightMenu />
+                </div>
               </div>
             </div>
           )}
 
-          <NavLink
-            to="/login"
-            className={({ isActive }) =>
-              `${
-                isActive && "text-[#B995D9]"
-              }   md:flex justify-center items-center gap-2 hidden `
-            }>
-            <span>LOGIN</span>
-            <LiaUser />
-          </NavLink>
+          <div className=" hidden md:flex items-center justify-start gap-4">
+            <NavRightMenu />
+            <ToggleButton />
+          </div>
         </div>
       </div>
       <SubNav />
