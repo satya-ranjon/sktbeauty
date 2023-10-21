@@ -13,6 +13,7 @@ const menu = [
   { link: "/", label: "HOME" },
   { link: "/add-product", label: "ADD PRODUCT" },
   { link: "/cart", label: "MY CART" },
+  { link: "/shop", label: "SHOP" },
 ];
 
 const Navbar = () => {
@@ -50,25 +51,24 @@ const Navbar = () => {
         className={`bg-[#471d6b]  text-white border-b-[1px] border-b-violet-800  ${styled}`}>
         <div className=" container mx-auto flex justify-between items-center py-5 font-normal text-md px-4 ">
           <Logo />
-
-          <div className=" md:hidden">
+          <div className=" flex justify-start gap-8 md:pr-4 lg:hidden">
             <ToggleButton onClick={handleTheme} toggle={dark} />
+            <FaBarsStaggered
+              className=" text-xl cursor-pointer"
+              onClick={() => setOpen(!isOpen)}
+            />
           </div>
-          <FaBarsStaggered
-            className=" text-xl cursor-pointer md:hidden"
-            onClick={() => setOpen(!isOpen)}
-          />
           {isOpen && (
             <div
               className={`${
-                windowWidth <= 425 && "absolute"
-              } top-0 bottom-0  w-64 md:w-fit right-0  bg-[#471d6b] z-10`}>
+                windowWidth <= 768 && "absolute"
+              } top-0 bottom-0  w-64 lg:w-fit right-0  bg-[#471d6b] z-[9999]`}>
               <button
                 onClick={() => setOpen(!isOpen)}
-                className=" md:hidden p-3 bg-[#b995d960] m-3 rounded-sm">
+                className=" lg:hidden p-3 bg-[#b995d960] m-3 rounded-sm">
                 <AiOutlineClose className=" text-xl" />
               </button>
-              <div className="h-full w-full flex md:flex-row  gap-8 flex-col justify-start mt-10 md:mt-0 md:justify-center items-center">
+              <div className="h-full w-full flex lg:flex-row  gap-8 flex-col justify-start mt-10 lg:mt-0 lg:justify-center items-center">
                 {menu.map((item) => (
                   <NavLink
                     key={item.link}
@@ -79,14 +79,14 @@ const Navbar = () => {
                     {item.label}
                   </NavLink>
                 ))}
-                <div className="  md:hidden">
+                <div className="  lg:hidden">
                   <NavRightMenu />
                 </div>
               </div>
             </div>
           )}
 
-          <div className=" hidden md:flex items-center justify-start gap-4">
+          <div className=" hidden lg:flex items-center justify-start gap-4">
             <NavRightMenu />
             <ToggleButton onClick={handleTheme} toggle={dark} />
           </div>
