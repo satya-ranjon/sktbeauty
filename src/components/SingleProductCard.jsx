@@ -1,5 +1,7 @@
 import { GrFormView } from "react-icons/gr";
 import useTheme from "../hooks/useTheme";
+import Rating from "./Rating";
+import Button from "./Button";
 
 const SingleProductCard = ({ product }) => {
   const { dark } = useTheme();
@@ -21,10 +23,22 @@ const SingleProductCard = ({ product }) => {
       </div>
       <div>
         <h1 className="uppercase">{product.name}</h1>
-        <div className=" text-md text-zinc-500">
+
+        <div className=" text-md text-zinc-500 py-3">
           {product?.description?.slice(0, 50)}
         </div>
-        <h2 className=" text-end p-4">${product.price}</h2>
+        <div className=" flex justify-start items-center">
+          <Rating rating={product?.rating} />
+        </div>
+        <div className=" flex justify-between items-center">
+          <h2 className=" text-end p-4 clear-left text-md font-semibold">
+            ${product.price}
+          </h2>
+          <button className=" bg-violet-800 text-white  py-1 text-sm px-3 rounded-sm">
+            {" "}
+            Add Card
+          </button>
+        </div>
       </div>
       <div className=" absolute -top-3 right-0 z-10">
         <div className="flex gap-2">
